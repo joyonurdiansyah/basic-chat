@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Talking With Friend</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+        @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css);
+
+        html,
+        body {
+            background: #e5e5e5;
+            font-family: 'Lato', sans-serif;
+            margin: 0px auto;
+        }
+
+        ::selection {
+            background: rgba(82, 179, 217, 0.3);
+            color: inherit;
+        }
+
+        a {
+            color: rgba(82, 179, 217, 0.9);
+        }
+
+        /* M E N U */
+
+        .menu {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            width: 100%;
+            height: 50px;
+            background: rgba(82, 179, 217, 0.9);
+            z-index: 100;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .back {
+            position: absolute;
+            width: 90px;
+            height: 50px;
+            top: 0px;
+            left: 0px;
+            color: #fff;
+            line-height: 50px;
+            font-size: 30px;
+            padding-left: 10px;
+            cursor: pointer;
+        }
+
+        .back img {
+            position: absolute;
+            top: 5px;
+            left: 30px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.98);
+            border-radius: 100%;
+            -webkit-border-radius: 100%;
+            -moz-border-radius: 100%;
+            -ms-border-radius: 100%;
+            margin-left: 15px;
+        }
+
+        .back:active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .name {
+            position: absolute;
+            top: 3px;
+            left: 110px;
+            font-family: 'Lato';
+            font-size: 25px;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.98);
+            cursor: default;
+        }
+
+        .last {
+            position: absolute;
+            top: 30px;
+            left: 115px;
+            font-family: 'Lato';
+            font-size: 11px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: default;
+        }
+
+        /* M E S S A G E S */
+
+        .chat {
+            list-style: none;
+            background: none;
+            margin: 0;
+            padding: 0 0 50px 0;
+            margin-top: 60px;
+            margin-bottom: 10px;
+        }
+
+        .chat li {
+            padding: 0.5rem;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .chat .avatar {
+            width: 40px;
+            height: 40px;
+            position: relative;
+            display: block;
+            z-index: 2;
+            border-radius: 100%;
+            -webkit-border-radius: 100%;
+            -moz-border-radius: 100%;
+            -ms-border-radius: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .chat .avatar img {
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
+            -webkit-border-radius: 100%;
+            -moz-border-radius: 100%;
+            -ms-border-radius: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .chat .day {
+            position: relative;
+            display: block;
+            text-align: center;
+            color: #c0c0c0;
+            height: 20px;
+            text-shadow: 7px 0px 0px #e5e5e5, 6px 0px 0px #e5e5e5, 5px 0px 0px #e5e5e5, 4px 0px 0px #e5e5e5, 3px 0px 0px #e5e5e5, 2px 0px 0px #e5e5e5, 1px 0px 0px #e5e5e5, 1px 0px 0px #e5e5e5, 0px 0px 0px #e5e5e5, -1px 0px 0px #e5e5e5, -2px 0px 0px #e5e5e5, -3px 0px 0px #e5e5e5, -4px 0px 0px #e5e5e5, -5px 0px 0px #e5e5e5, -6px 0px 0px #e5e5e5, -7px 0px 0px #e5e5e5;
+            box-shadow: inset 20px 0px 0px #e5e5e5, inset -20px 0px 0px #e5e5e5, inset 0px -2px 0px #d7d7d7;
+            line-height: 38px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            cursor: default;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .other .msg {
+            order: 1;
+            border-top-left-radius: 0px;
+            box-shadow: -1px 2px 0px #D4D4D4;
+        }
+
+        .other:before {
+            content: "";
+            position: relative;
+            top: 0px;
+            right: 0px;
+            left: 40px;
+            width: 0px;
+            height: 0px;
+            border: 5px solid #fff;
+            border-left-color: transparent;
+            border-bottom-color: transparent;
+        }
+
+        .self {
+            justify-content: flex-end;
+            align-items: flex-end;
+        }
+
+        .self .msg {
+            order: 1;
+            border-bottom-right-radius: 0px;
+            box-shadow: 1px 2px 0px #D4D4D4;
+        }
+
+        .self .avatar {
+            order: 2;
+        }
+
+        .self .avatar:after {
+            content: "";
+            position: relative;
+            display: inline-block;
+            bottom: 19px;
+            right: 0px;
+            width: 0px;
+            height: 0px;
+            border: 5px solid #fff;
+            border-right-color: transparent;
+            border-top-color: transparent;
+            box-shadow: 0px 2px 0px #D4D4D4;
+        }
+
+        .msg {
+            background: white;
+            min-width: 50px;
+            padding: 10px;
+            border-radius: 2px;
+            box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.07);
+        }
+
+        .msg p {
+            font-size: 0.9rem;
+            line-height: 1.2rem;
+            font-weight: 300;
+            color: rgba(0, 0, 0, 0.9);
+            margin: 0;
+        }
+
+        .msg span {
+            font-size: 0.7rem;
+            line-height: 1.0rem;
+            font-weight: 300;
+            color: rgba(0, 0, 0, 0.5);
+            display: block;
+            margin-top: 2px;
+        }
+
+        .textarea-container {
+            display: flex;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            background: #fff;
+            padding: 10px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .textarea-container .textarea {
+            flex: 1;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-right: 10px;
+        }
+
+        .textarea-container .send-button {
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        .textarea-container .send-button i {
+            font-size: 16px;
+        }
+
+        .textarea-container .send-button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu">
+        <div class="back">
+            <i class="fa fa-chevron-left"></i>
+            <img src="https://i.imgur.com/DY6gND0.png" draggable="false" />
+        </div>
+        <div class="name">Chat</div>
+        <div class="last" id="totalUserOnline">0 orang online</div>
+    </div>
+    <ol class="chat" id="message-list">
+        
+    </ol>
+    <div class="textarea-container">
+        <input class="textarea" type="text" id="message" placeholder="Type here!" />
+        <button class="send-button" id="sendMessage"><i class="fa fa-paper-plane"></i></button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        // Emit join event
+        socket.emit('join');
+
+        // Listen for incoming messages
+        socket.on('message', (param) => {
+            $('#message-list').append(
+                `<li class="${param.type}">
+                    <div class="avatar">
+                        <img src="https://i.imgur.com/DY6gND0.png" draggable="false" />
+                    </div>
+                    <div class="msg">
+                        <p>${param.text}</p>
+                        <time>${param.time}</time>
+                    </div>
+                </li>`
+            );
+            $('#message-list').scrollTop($('#message-list')[0].scrollHeight); 
+        });
+
+        // Update total users online
+        socket.on('countUserOnline', (countUserOnline) => {
+            $("#totalUserOnline").text(countUserOnline + ' orang online');
+        });
+
+        $("#sendMessage").click(() => {
+            const message = $("#message").val();
+            if (message.trim() !== "") {
+                socket.emit('message', {
+                    text: message,
+                    type: 'self', 
+                    time: new Date().toLocaleTimeString() 
+                });
+                $("#message").val('');  
+            }
+        });
+    </script>
+</body>
+
+</html>
